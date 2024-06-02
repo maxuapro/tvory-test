@@ -26,6 +26,73 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+@layer components {
+  /* buttons */
+  .btn {
+    @apply rounded-md border-0 px-3 py-1 text-center text-white hover:bg-opacity-80 hover:transition hover:duration-200 disabled:bg-zinc-400/50 disabled:opacity-100;
+  }
+
+  .btn-primary {
+    @apply bg-indigo-600;
+  }
+
+  .btn-cancel {
+    @apply bg-orange-400;
+  }
+
+  .btn-danger {
+    @apply bg-red-600;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-800;
+  }
+
+  .btn-success {
+    @apply bg-green-600;
+  }
+
+  /* inputs */
+
+  input {
+    @apply rounded-md border border-slate-500 px-4 py-2 outline-none;
+  }
+
+  textarea {
+    @apply resize-none rounded-md border border-slate-500 px-4 py-2 outline-none;
+  }
+
+  input:invalid[focused="true"] {
+    @apply border-red-600;
+  }
+
+  input:invalid[focused="true"] ~ span {
+    @apply block;
+  }
+
+  /* SCROLL STYLING */
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
