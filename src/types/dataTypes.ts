@@ -5,7 +5,7 @@ export type InviteStatus = "sent" | "draft";
 /**
  * Array of strings
  */
-export type Tag = string | undefined;
+export type Tag = string;
 /**
  * Invitation data type
  */

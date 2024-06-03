@@ -76,7 +76,7 @@ const AboutPage = () => {
           </li>
           <li>
             Styling (Optional): Visually pleasing design that aligns with the
-            project's purpose.
+            projects purpose.
           </li>
           <li>
             Bonus Points: Responsive design for various screen sizes.
@@ -103,7 +103,8 @@ const AboutPage = () => {
             Check it out!
           </Link>
           <Link
-            href="/invites"
+            href="https://github.com/maxuapro/tvory-test"
+            target="_blank"
             className="rounded-lg bg-gradient-to-br from-sky-500 to-green-500 px-8 py-3 text-white"
           >
             Github code

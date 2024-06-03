@@ -30,7 +30,6 @@ const EditPage = () => {
       });
       if (selectedInvites.length > 0) {
         setFormValues(selectedInvites[0]);
-        console.log(selectedInvites[0]);
         if (selectedInvites[0].status !== "sent") {
           setEditingAllowed(true);
         }
@@ -40,7 +39,7 @@ const EditPage = () => {
       return;
     };
     getInviteByID(inviteID);
-  }, []);
+  }, [inviteID, invites]);
 
   const onChangeFormValues = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -54,7 +53,7 @@ const EditPage = () => {
   };
 
   const onSaveInvitation = (send?: "send") => {
-    // console.log("Saving invite ID:", inviteID);
+    console.log("Saving invite ID:", inviteID);
     if (formValues) {
       let updatedItems: IInviteCard[];
       if (send) {

@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { AppStore } from "@/src/context/AppContext";
 //* types
 import { IInviteCard, Tag } from "@/src/types/dataTypes";
+//* utils
+import { generateRandomString } from "@/src/utils/idgen";
 
 interface IAppData {
   invites: IInviteCard[];
@@ -41,9 +43,13 @@ const CreatePage = () => {
   const onSaveInvitation = (send?: "send") => {
     console.log("Creating invite --->");
     if (send) {
-      invites.push({ ...formValues, status: "sent" });
+      invites.push({
+        ...formValues,
+        status: "sent",
+        id: generateRandomString(),
+      });
     } else {
-      invites.push(formValues);
+      invites.push({ ...formValues, id: generateRandomString() });
     }
     const updatedState: IAppData = { tags, invites };
     setData(updatedState);
@@ -81,7 +87,7 @@ const CreatePage = () => {
             </label>
 
             <label>
-              <h1>Phone</h1>
+              <h1>Phone copy this: (0506546556)</h1>
               <input
                 type="number"
                 name="phone"

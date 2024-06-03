@@ -1,40 +1,26 @@
-import { useContext, createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 
-type FilterStatus = "all" | "draft" | "sent";
-type FilterTag = string | undefined;
-
-// interface FilterObject {
-//   status: FilterStatus;
-//   tag: FilterTag;
-// }
-
-interface FilterRule {
-  filterStatus: FilterStatus;
-  setFilterStatus: (state: FilterStatus) => void;
-  filterTag: FilterTag;
-  setFilterTag: (state: FilterTag) => void;
+export interface IFilterObject {
+  [key: string]: string;
 }
 
-const FilterContext = createContext<FilterRule>({
-  filterStatus: "all",
-  setFilterStatus: () => undefined,
-  filterTag: undefined,
-  setFilterTag: () => undefined,
+interface IFilterContext {
+  filterObject: IFilterObject;
+  setFilterObject: React.Dispatch<React.SetStateAction<IFilterObject>>;
+}
+
+const FilterContext = createContext<IFilterContext>({
+  filterObject: {} as IFilterObject,
+  setFilterObject: () => {},
 });
 
-const FilterContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
-  const [filterTag, setFilterTag] = useState<FilterTag | undefined>(undefined);
-  // const [filter, setFilter] = useState<FilterObject>({status: "all", tag: undefined});
-
-  // const standAloneFilter = ({key, value}: {key: }) => {
-
-  // }
+const FilterContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [filterObject, setFilterObject] = useState<IFilterObject>({});
 
   return (
-    <FilterContext.Provider
-      value={{ filterStatus, setFilterStatus, filterTag, setFilterTag }}
-    >
+    <FilterContext.Provider value={{ filterObject, setFilterObject }}>
       {children}
     </FilterContext.Provider>
   );
