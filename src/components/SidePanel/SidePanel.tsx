@@ -21,7 +21,7 @@ const SidePanel = ({
   const [tagsToShow] = useState(tags);
 
   return (
-    <div className="">
+    <div className="text-white">
       <h1 className="my-5 text-center">Invitations</h1>
       <div>
         <Selector
