@@ -18,13 +18,7 @@ const SidePanel = ({
 }) => {
   const { tags } = AppStore();
 
-  const tagsSelectors = tags.map((tag) => {
-    return { title: tag };
-  });
-
-  const [tagsToShow, setTagsToShow] = useState(tagsSelectors);
-
-  // console.log("fake tags", tagsToShow);
+  const [tagsToShow] = useState(tags);
 
   return (
     <div className="">
@@ -33,37 +27,36 @@ const SidePanel = ({
         <Selector
           icon={<FiDisc />}
           label="All"
-          filteringStatus="all"
+          filterObject={{}}
           setShowSidePanel={setShowSidePanel}
         />
         <Selector
           icon={<FiSend />}
           label="Sent"
-          filteringStatus="sent"
+          filterObject={{ status: "sent" }}
           setShowSidePanel={setShowSidePanel}
         />
         <Selector
           icon={<FiEdit />}
           label="Drafts"
-          filteringStatus="draft"
+          filterObject={{ status: "draft" }}
           setShowSidePanel={setShowSidePanel}
         />
         <Selector
           icon={<FiBookOpen />}
           label="Opened"
-          filteringStatus="all"
+          filterObject={{}}
           setShowSidePanel={setShowSidePanel}
         />
 
         <hr className="m-3" />
 
         {tagsToShow.length > 0 &&
-          tagsToShow.map((selector, index) => (
+          tagsToShow.map((tag, index) => (
             <Selector
               key={index}
-              label={selector.title}
-              filteringTag={selector.title}
-              filteringStatus="all"
+              label={tag}
+              filterObject={{ tag: tag }}
               setShowSidePanel={setShowSidePanel}
             />
           ))}

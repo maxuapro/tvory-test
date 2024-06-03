@@ -1,22 +1,6 @@
 import { IInviteCard } from "../types/dataTypes";
 
-export const fakeTags = [
-  "Friends",
-  "Coworkers",
-  "Network",
-  "Friends",
-  "Coworkers",
-  "Network",
-  "Friends",
-  "Coworkers",
-  "Network",
-  "Friends",
-  "Coworkers",
-  "Network",
-  "Friends",
-  "Coworkers",
-  "Network",
-];
+export const fakeTags = ["Friends", "Coworkers", "Network"];
 
 export const invitesFakeData: IInviteCard[] = [
   {

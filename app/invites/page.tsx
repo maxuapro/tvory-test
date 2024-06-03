@@ -2,53 +2,49 @@
 import { useState, useEffect } from "react";
 //* context
 import { AppStore } from "@/src/context/AppContext";
-import { FilterStore } from "@/src/context/FilterContext";
-
+import { FilterStore, IFilterObject } from "@/src/context/FilterContext";
+//* types
 //* components
 import InviteCard from "@/src/components/InviteCard";
+import { IInviteCard } from "@/src/types/dataTypes";
 
 const InvitesPage = () => {
   const { invites } = AppStore();
-  const { filterStatus, filterTag } = FilterStore();
+  const { filterObject } = FilterStore();
 
   const [invitesToShow, setInvitesToShow] = useState(invites);
 
-  const filterInvitesByStatus = (status: string) => {
-    let filtered;
-    if (status === "sent") {
-      filtered = invites.filter((invite) => {
-        return invite.status === "sent";
-      });
-      setInvitesToShow(filtered);
-      return;
-    }
-    if (status === "draft") {
-      filtered = invites.filter((invite) => {
-        return invite.status === "draft";
-      });
-      setInvitesToShow(filtered);
-      return;
-    }
-    filtered = [...invites];
-    setInvitesToShow(filtered);
-    return;
-  };
-
-  const filterInvitesByTag = (tag?: string) => {
-    if (!tag) return;
-    let filtered = invites.filter((invite) => {
-      return invite.tags.includes(tag);
-    });
-    setInvitesToShow(filtered);
-  };
-
   useEffect(() => {
-    filterInvitesByStatus(filterStatus);
-  }, [filterStatus]);
+    console.log("filterObject", filterObject);
+    const universalFilter = (filt: IFilterObject) => {
+      const arrayKeys = Object.keys(filt);
 
-  useEffect(() => {
-    filterInvitesByTag(filterTag);
-  }, [filterTag]);
+      //* if no filters provided -> return all data !
+      if (arrayKeys.length < 1) {
+        console.log("arrayKeys.length =", arrayKeys.length);
+        setInvitesToShow(invites);
+        return;
+      }
+
+      const filtered: IInviteCard[] = [];
+
+      for (let key of arrayKeys) {
+        if (key === "tag") {
+          const tempArray: IInviteCard[] = invites.filter((invite) => {
+            return invite.tags.includes(filt[key]);
+          });
+          filtered.push(...tempArray);
+        } else {
+          const tempArray: IInviteCard[] = invites.filter((invite) => {
+            return invite[key as keyof IInviteCard] === filt[key];
+          });
+          filtered.push(...tempArray);
+        }
+      }
+      setInvitesToShow(filtered);
+    };
+    universalFilter(filterObject);
+  }, [filterObject, invites]);
 
   return (
     <div className="text-black">

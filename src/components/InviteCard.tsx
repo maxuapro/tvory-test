@@ -4,6 +4,8 @@ import Link from "next/link";
 import { IInviteCard } from "../types/dataTypes";
 //* components
 import Tag from "./Tag";
+//* utils
+import { convertDate } from "../utils/dateFormatter";
 //* icons
 import { FiMapPin } from "react-icons/fi"; //* location
 import { FiPhone } from "react-icons/fi"; //* phone
@@ -18,7 +20,7 @@ const InviteCard = ({ invite }: { invite: IInviteCard }) => {
   return (
     <Link
       href={`invites/edit/${id}`}
-      className="flex flex-col justify-between gap-2 rounded-lg border border-black bg-white p-5 text-black hover:cursor-pointer hover:bg-zinc-100"
+      className="flex flex-col justify-between gap-2 rounded-lg border border-black bg-white p-5 text-black hover:cursor-pointer hover:bg-indigo-50"
     >
       <div>
         <h1 className="line-clamp-2 text-2xl font-bold leading-7">{title}</h1>
@@ -46,7 +48,7 @@ const InviteCard = ({ invite }: { invite: IInviteCard }) => {
               <h1>
                 <FiCalendar />
               </h1>
-              <h1>{time}</h1>
+              <h1>{convertDate(time)}</h1>
             </div>
           )}
 
